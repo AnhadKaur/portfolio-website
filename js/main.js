@@ -33,7 +33,7 @@ navLinks.querySelectorAll('a').forEach((link) => {
 year.textContent = new Date().getFullYear();
 
 const revealElements = document.querySelectorAll(
-  '.split-section, .section-heading, .skill-card, .project-card, .timeline-item, .contact-form, .contact-card'
+  '.split-section, .section-heading, .skill-card, .project-card, .timeline-item, .contact-form, .contact-card, .contact-button'
 );
 
 revealElements.forEach((element) => {

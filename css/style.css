@@ -313,7 +313,8 @@ h3 {
 .project-card,
 .timeline-item,
 .contact-form,
-.contact-card {
+.contact-card,
+.contact-button {
   border: 1px solid var(--border);
   background: color-mix(in srgb, var(--surface) 94%, transparent);
   box-shadow: var(--shadow);
@@ -420,14 +421,16 @@ h3 {
 .skill-card,
 .project-card,
 .timeline-item,
-.contact-card {
+.contact-card,
+.contact-button {
   transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .skill-card:hover,
 .project-card:hover,
 .timeline-item:hover,
-.contact-card:hover {
+.contact-card:hover,
+.contact-button:hover {
   transform: translateY(-8px);
   border-color: color-mix(in srgb, var(--primary) 42%, var(--border));
   box-shadow: 0 30px 80px rgba(37, 99, 235, 0.18);
@@ -473,6 +476,35 @@ h3 {
   display: grid;
   grid-template-columns: 1.3fr 0.7fr;
   gap: 22px;
+}
+
+.contact-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.contact-button {
+  padding: 24px;
+}
+
+.contact-button span,
+.contact-button strong {
+  display: block;
+}
+
+.contact-button span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.contact-button strong {
+  color: var(--primary);
+  overflow-wrap: anywhere;
 }
 
 .contact-form {
@@ -620,7 +652,8 @@ a:focus-visible {
 
   .hero,
   .split-section,
-  .contact-grid {
+  .contact-grid,
+  .contact-links {
     grid-template-columns: 1fr;
   }
 
