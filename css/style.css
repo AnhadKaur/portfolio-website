@@ -43,6 +43,33 @@ body {
   overflow-x: hidden;
 }
 
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.24;
+  pointer-events: none;
+  z-index: -1;
+  animation: glowMove 9s ease-in-out infinite alternate;
+}
+
+body::before {
+  top: 90px;
+  left: -100px;
+  background: var(--primary);
+}
+
+body::after {
+  right: -120px;
+  bottom: 80px;
+  background: var(--accent);
+  animation-delay: 1.2s;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -75,6 +102,11 @@ img {
   font-size: 1.25rem;
   font-weight: 800;
   letter-spacing: -0.04em;
+  transition: transform 0.2s ease;
+}
+
+.brand:hover {
+  transform: scale(1.04);
 }
 
 .brand span {
@@ -96,6 +128,30 @@ img {
 .nav-links a:hover,
 .nav-links a:focus-visible {
   color: var(--primary);
+}
+
+.nav-links a {
+  position: relative;
+}
+
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.25s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 .theme-toggle,
@@ -215,6 +271,22 @@ h3 {
   border: 1px solid var(--border);
   font-weight: 800;
   transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.38), transparent);
+  transform: translateX(-120%);
+  transition: transform 0.55s ease;
+}
+
+.btn:hover::before,
+.btn:focus-visible::before {
+  transform: translateX(120%);
 }
 
 .btn:hover,
@@ -265,6 +337,7 @@ h3 {
   color: white;
   font-size: 2rem;
   font-weight: 900;
+  animation: avatarPulse 2.8s ease-in-out infinite;
 }
 
 .hero-card p {
@@ -504,6 +577,29 @@ a:focus-visible {
   }
 }
 
+@keyframes glowMove {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(45px, -35px, 0) scale(1.16);
+  }
+}
+
+@keyframes avatarPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--primary) 36%, transparent);
+    transform: scale(1);
+  }
+
+  50% {
+    box-shadow: 0 0 0 14px transparent;
+    transform: scale(1.04);
+  }
+}
+
 @media (max-width: 860px) {
   .menu-toggle {
     display: inline-flex;
@@ -579,5 +675,11 @@ a:focus-visible {
   .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  body::before,
+  body::after,
+  .avatar-placeholder {
+    animation: none;
   }
 }
