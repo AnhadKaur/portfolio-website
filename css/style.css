@@ -40,6 +40,7 @@ body {
   color: var(--text);
   line-height: 1.6;
   transition: background 0.25s ease, color 0.25s ease;
+  overflow-x: hidden;
 }
 
 a {
@@ -250,6 +251,7 @@ h3 {
 .hero-card {
   padding: 32px;
   text-align: center;
+  animation: floatCard 5s ease-in-out infinite;
 }
 
 .avatar-placeholder {
@@ -343,6 +345,22 @@ h3 {
   overflow: hidden;
 }
 
+.skill-card,
+.project-card,
+.timeline-item,
+.contact-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.skill-card:hover,
+.project-card:hover,
+.timeline-item:hover,
+.contact-card:hover {
+  transform: translateY(-8px);
+  border-color: color-mix(in srgb, var(--primary) 42%, var(--border));
+  box-shadow: 0 30px 80px rgba(37, 99, 235, 0.18);
+}
+
 .project-image {
   min-height: 190px;
   display: grid;
@@ -358,6 +376,15 @@ h3 {
   display: flex;
   gap: 18px;
   margin-top: 18px;
+}
+
+.project-image {
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.project-card:hover .project-image {
+  transform: scale(1.03);
+  filter: saturate(1.2);
 }
 
 .timeline {
@@ -427,6 +454,54 @@ a:focus-visible {
 .site-footer a {
   color: var(--primary);
   font-weight: 800;
+}
+
+.hero-content,
+.hero-card {
+  animation: fadeUp 0.8s ease both;
+}
+
+.hero-card {
+  animation-name: fadeUp, floatCard;
+  animation-duration: 0.8s, 5s;
+  animation-timing-function: ease, ease-in-out;
+  animation-fill-mode: both, none;
+  animation-iteration-count: 1, infinite;
+  animation-delay: 0.12s, 0.9s;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatCard {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
 @media (max-width: 860px) {
@@ -499,5 +574,10 @@ a:focus-visible {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
   }
 }

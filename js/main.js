@@ -31,3 +31,29 @@ navLinks.querySelectorAll('a').forEach((link) => {
 });
 
 year.textContent = new Date().getFullYear();
+
+const revealElements = document.querySelectorAll(
+  '.split-section, .section-heading, .skill-card, .project-card, .timeline-item, .contact-form, .contact-card'
+);
+
+revealElements.forEach((element) => {
+  element.classList.add('reveal');
+});
+
+const revealOnScroll = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealOnScroll.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.16,
+  }
+);
+
+revealElements.forEach((element) => {
+  revealOnScroll.observe(element);
+});
