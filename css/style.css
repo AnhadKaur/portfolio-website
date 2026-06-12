@@ -485,24 +485,86 @@ h3 {
 }
 
 .contact-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 112px;
   padding: 24px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--primary) 10%, transparent), transparent 62%),
+    var(--surface);
 }
 
-.contact-button span,
-.contact-button strong {
+.contact-button::after {
+  content: "→";
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  color: var(--primary);
+  font-size: 1.4rem;
+  font-weight: 900;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.contact-button:hover::after,
+.contact-button:focus-visible::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.contact-button:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.contact-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 56px;
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  color: #ffffff;
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.18);
+}
+
+.contact-icon svg {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+}
+
+.email-link .contact-icon {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+}
+
+.github-link .contact-icon {
+  background: linear-gradient(135deg, #111827, #475569);
+}
+
+.linkedin-link .contact-icon {
+  background: linear-gradient(135deg, #0a66c2, #38bdf8);
+}
+
+.contact-text,
+.contact-text span,
+.contact-text strong {
   display: block;
 }
 
-.contact-button span {
+.contact-text span {
   color: var(--muted);
   font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.08em;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   text-transform: uppercase;
 }
 
-.contact-button strong {
+.contact-text strong {
   color: var(--primary);
   overflow-wrap: anywhere;
 }
